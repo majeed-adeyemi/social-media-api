@@ -1,0 +1,19 @@
+const express = require("express");
+const { getUserDetails, updateUserDetails, } = require("../controllers/userController");
+const { protect } = require("../middleware/authMiddleware");
+const upload = require("../middleware/upload");
+
+const router = express.Router();
+
+// Get user details
+router.get("/user/:id", protect, getUserDetails);
+
+// Update user details
+router.put( "/user/:id", protect, upload.fields([
+    { name: "profilePicture", maxCount: 1 },
+    { name: "coverPhoto", maxCount: 1 },
+  ]),
+  updateUserDetails
+);
+
+module.exports = router;
