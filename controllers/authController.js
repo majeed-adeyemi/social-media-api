@@ -3,6 +3,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const { storeOTP, verifyOTP } = require("../utils/otpService");
 const sendOTPEmail = require("../utils/emailService");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const TOKEN_SECRET = process.env.JWT_SECRET;
 
@@ -26,6 +29,14 @@ const requestOTP = async (req, res) => {
 
     // Generate a token with the email
     const token = jwt.sign({ email }, TOKEN_SECRET, { expiresIn: "15m" });
+
+    // Set the token in an HTTP-only cookie
+    res
+      .cookie("otpToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV,
+      maxAge: 15 * 60 * 1000, // 15 minutes
+    });
 
     res.status(200).json({ message: "OTP sent to email", token });
   } catch (err) {

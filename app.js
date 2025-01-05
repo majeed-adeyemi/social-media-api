@@ -34,7 +34,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware
-app.use(cors());
+// Configure CORS
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with frontend origin
+    credentials: true, // Allow cookies and other credentials
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
