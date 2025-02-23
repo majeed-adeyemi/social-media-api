@@ -3,6 +3,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
     "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -23,7 +24,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

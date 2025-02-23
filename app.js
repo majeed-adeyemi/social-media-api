@@ -6,6 +6,7 @@ const session = require("express-session");
 const passport = require("passport");
 require("./config/passport"); // Initialize passport configuration
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware
+
 // Configure CORS
 app.use(
   cors({
@@ -41,6 +43,7 @@ app.use(
     credentials: true, // Allow cookies and other credentials
   })
 );
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
